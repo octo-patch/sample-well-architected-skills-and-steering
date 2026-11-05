@@ -50,16 +50,16 @@ def test_minimax_config_contains_current_models_and_metadata():
         "global_en": "https://api.minimax.io/v1",
         "cn_zh": "https://api.minimaxi.com/v1",
     }
-    assert provider["models"]["MiniMax-M3"] == {
-        "context_window": 1000000,
-        "input_modalities": ["text", "image", "video"],
-        "thinking": ["adaptive", "disabled"],
-    }
-    assert provider["models"]["MiniMax-M3.1-Flash"] == {
+    expected_metadata = {
         "context_window": 1000000,
         "input_modalities": ["text", "image", "video"],
         "thinking": ["adaptive"],
+        "thinking_always_on": True,
+        "reasoning_effort": ["low", "medium", "high", "xhigh", "max"],
+        "reasoning_effort_default": "max",
     }
+    assert provider["models"]["MiniMax-M3"] == expected_metadata
+    assert provider["models"]["MiniMax-M3.1-Flash"] == expected_metadata
     assert "MiniMax-M3.1-Flash" in config["grading"]["panel"]
 
 
